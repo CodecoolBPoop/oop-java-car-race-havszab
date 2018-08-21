@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Randutil {
 
-    public int generateNumInRange(int range) {
+    public static int generateNumInRange(int range) {
         Random rand = new Random();
         int randInt = rand.nextInt(range) + 1;
         return randInt;

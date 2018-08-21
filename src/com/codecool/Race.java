@@ -5,6 +5,9 @@ import java.util.*;
 public class Race {
 
     private int numOfRacingVehicles = 30;
+    public boolean isThereABrokenTruck = false;
+    public boolean isRaining = false;
+    public int speedEnabledWhileTruckIsBroken = 75;
 
     private List<Vehicle> vehicleList = new ArrayList<>();
 
@@ -36,8 +39,5 @@ public class Race {
 
     }
 
-    private boolean isThereABrokenTruck(){
-        return true;
-    }
 
 }

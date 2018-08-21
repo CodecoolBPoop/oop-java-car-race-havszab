@@ -8,6 +8,8 @@ public class Truck extends Vehicle {
 
 
     Randutil randutil = new Randutil();
+    public int distanceTraveled = 0;
+    public int breakDownTurnsLeft = 0;
 
     @Override
     protected String name() {
@@ -16,13 +18,14 @@ public class Truck extends Vehicle {
     }
 
     @Override
-    protected int distanceTraveled() {
-        return 0;
-    }
-
-    @Override
     protected void moveForAnHour(Race race) {
-
+        int breakDownChance = randutil.generateNumInRange(20); //Chance is 1 to 20 (5%)
+        if (breakDownChance == 1)
+            breakDownTurnsLeft = 2;
+        if (breakDownTurnsLeft == 0)
+            if (race.isThereABrokenTruck == false)
+                distanceTraveled += 100;
+            else distanceTraveled += race.speedEnabledWhileTruckIsBroken;
     }
 
 }

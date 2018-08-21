@@ -6,10 +6,14 @@ public class Car extends Vehicle {
         this.name();
     }
 
-    String[] carNames = {"Oracle", "Universe", "Guardian", "Crusader", "Presence",
+    private String[] carNames = {"Oracle", "Universe", "Guardian", "Crusader", "Presence",
             "Hollo", "Pyre", "Crux", "Tarragon", "Spirit",
             "Dynamics", "Union", "Nimbus", "Virtue", "Treasure",
             "Flux", "Passion", "Paragon", "Wish", "Avalanche"};
+
+    protected int distanceTraveled = 0;
+
+    private int minSpeed = 80;
 
     Randutil randutil = new Randutil();
 
@@ -21,12 +25,12 @@ public class Car extends Vehicle {
     }
 
     @Override
-    protected int distanceTraveled() {
-        return 0;
-    }
-
-    @Override
     protected void moveForAnHour(Race race) {
+        if (race.isThereABrokenTruck == true){
+            distanceTraveled += 75;
+        } else {
+            distanceTraveled += (randutil.generateNumInRange(30) + minSpeed - 1);
+        }
 
     }
 
