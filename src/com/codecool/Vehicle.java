@@ -2,7 +2,13 @@ package com.codecool;
 
 public abstract class Vehicle {
 
-    protected abstract String name();
+    Randutil randutil = new Randutil();
+
+    public int distanceTraveled = 0;
+
+    public String name;
+
+    protected abstract void name();
 
     protected abstract void moveForAnHour(Race race);
 

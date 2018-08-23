@@ -6,22 +6,19 @@ public class Car extends Vehicle {
         this.name();
     }
 
+
     private String[] carNames = {"Oracle", "Universe", "Guardian", "Crusader", "Presence",
             "Hollo", "Pyre", "Crux", "Tarragon", "Spirit",
             "Dynamics", "Union", "Nimbus", "Virtue", "Treasure",
             "Flux", "Passion", "Paragon", "Wish", "Avalanche"};
 
-    protected int distanceTraveled = 0;
-
     private int minSpeed = 80;
 
-    Randutil randutil = new Randutil();
-
     @Override
-    protected String name() {
+    protected void name() {
         String firstName = carNames[randutil.generateNumInRange(carNames.length - 1)];
         String lastName = carNames[randutil.generateNumInRange(carNames.length - 1)];
-        return firstName + " " + lastName;
+        this.name = firstName + " " + lastName;
     }
 
     @Override
@@ -31,7 +28,6 @@ public class Car extends Vehicle {
         } else {
             distanceTraveled += (randutil.generateNumInRange(30) + minSpeed - 1);
         }
-
     }
 
 }

@@ -5,16 +5,15 @@ public class Motorcycle extends Vehicle {
     public Motorcycle() {
         this.name();
     }
-    Randutil randutil = new Randutil();
+
     protected static int nameNumber = 0;
-    public int distanceTraveled = 0;
     private int minSpeed = 5;
 
 
     @Override
-    protected String name() {
+    protected void name() {
         nameNumber += 1;
-        return "Motorcycle " + (nameNumber-10);
+        this.name = "Motorcycle " + (nameNumber);
     }
 
 
@@ -27,7 +26,6 @@ public class Motorcycle extends Vehicle {
             if (maxSpeed >= race.speedEnabledWhileTruckIsBroken)
                 maxSpeed = race.speedEnabledWhileTruckIsBroken;
         distanceTraveled += maxSpeed;
-
     }
 
 }
