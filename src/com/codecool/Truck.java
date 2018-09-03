@@ -2,16 +2,15 @@ package com.codecool;
 
 public class Truck extends Vehicle {
 
+    private int breakDownTurnsLeft = 0;
+
     public Truck() {
         this.name();
     }
 
-    public int breakDownTurnsLeft = 0;
-
     @Override
     protected void name() {
-        this.name = randutil.generateNumInRange(1000) + "";
-
+        this.name = Randutil.generateNumInRange(1000) + "";
     }
 
     @Override
@@ -19,13 +18,13 @@ public class Truck extends Vehicle {
         if (breakDownTurnsLeft == 0) {
             if (!race.isThereABrokenTruck)
                 distanceTraveled += 100;
-            else distanceTraveled += race.speedEnabledWhileTruckIsBroken;
+            else distanceTraveled += Race.SPEED_ENABLEED_WHILE_TRUCK_IS_BROKEN;
         }
     }
 
-    protected void breakDownCheck(Race race) {
+    void breakDownCheck(Race race) {
         if (breakDownTurnsLeft == 0) {
-            int breakDownChance = randutil.generateNumInRange(20); //Chance is 1 to 20 (5%)
+            int breakDownChance = Randutil.generateNumInRange(20); //Chance is 1 to 20 (5%)
             if (breakDownChance == 1) { // Truck is broken:
                 breakDownTurnsLeft = 2;
                 race.isThereABrokenTruck = true;

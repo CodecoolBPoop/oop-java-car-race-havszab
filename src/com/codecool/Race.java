@@ -8,14 +8,16 @@ public class Race {
 
     }
 
-    private int numOfRacingVehicles = 30;
+    private static final int NUM_OF_RACING_VEHICLES = 30;
+    static final int SPEED_ENABLEED_WHILE_TRUCK_IS_BROKEN = 75;
+    private static final int NUM_OF_HOURS = 50;
+
     boolean isThereABrokenTruck = false;
-    int speedEnabledWhileTruckIsBroken = 75;
-    public static boolean isRaining = false;
+    static boolean isRaining = false;
     private Vehicle fastest;
 
     private List<Vehicle> vehicleList = new ArrayList<>();
-    protected static List<Integer> breakDownsLeftList = new ArrayList<>();
+    private static List<Integer> breakDownsLeftList = new ArrayList<>();
 
     public static void main(String[] args) {
         Race race = new Race();
@@ -25,7 +27,7 @@ public class Race {
     }
 
     private void createVehicles(){
-        while (vehicleList.size() != numOfRacingVehicles) {
+        while (vehicleList.size() != NUM_OF_RACING_VEHICLES) {
             vehicleList.add(new Car());
             vehicleList.add(new Motorcycle());
             vehicleList.add(new Truck());
@@ -33,15 +35,14 @@ public class Race {
     }
 
     private void simulateRace() {
-        for (int i = 0; i <= 49; i++) {
+        for (int i = 0; i < NUM_OF_HOURS; i++) {
             Race race = new Race();
-            Weather weather = new Weather();
-            weather.setRaining();
-            isRaining = weather.isRaining;
+            Weather.setRaining();
+            isRaining = Weather.isRaining;
             breakDownsLeftList.clear();
             int index = 0;
             isThereABrokenTruck = false;
-            for (int j = 0; j <= 29; j++) {
+            for (int j = 0; j < NUM_OF_RACING_VEHICLES; j++) {
                 if (vehicleList.get(j) instanceof Truck) {
                     ((Truck) vehicleList.get(j)).breakDownCheck(race);
                     if (breakDownsLeftList.get(index) != 0)
@@ -49,8 +50,8 @@ public class Race {
                     index++;
                 }
             }
-            for (int j = 0; j <= 29; j++) {
-                vehicleList.get(j).moveForAnHour(race);
+            for(Vehicle vehicle : vehicleList) {
+                vehicle.moveForAnHour(race);
             }
         }
     }
@@ -59,25 +60,33 @@ public class Race {
         for (int i = 0; i < vehicleList.size(); i++) {
             String vehicleName = vehicleList.get(i).name;
             int distance = vehicleList.get(i).distanceTraveled;
-            try {
-                if (distance > fastest.distanceTraveled)
-                    fastest = vehicleList.get(i);
-            } catch (NullPointerException nullE) {
-                fastest = vehicleList.get(i);
-            }
+            checkRank(i, distance);
             System.out.print(i+1 + ". ");
             System.out.print(vehicleName + ": ");
             System.out.print(distance + " km");
             System.out.println(" ");
         }
-        System.out.println("------------------------------------" );
+        printFastestVehicle();
+    }
+
+    private void checkRank(int i, int distance) {
+        try {
+            if (distance > fastest.distanceTraveled)
+                fastest = vehicleList.get(i);
+        } catch (NullPointerException nullE) {
+            fastest = vehicleList.get(i);
+        }
+    }
+
+    private void printFastestVehicle() {
+        System.out.println("--------------------------------------------" );
         System.out.println("The fastest vehicle was " + fastest.name + " with " + fastest.distanceTraveled + " km.");
-        System.out.println("Average speed: " + fastest.distanceTraveled/50 + " km/h");
-        System.out.println("------------------------------------" );
+        System.out.println("Average speed: " + fastest.distanceTraveled/NUM_OF_HOURS + " km/h");
+        System.out.println("--------------------------------------------" );
 
     }
 
-    public void setBreakDownsLeftList(Integer element) {
+    void setBreakDownsLeftList(Integer element) {
         breakDownsLeftList.add(element);
     }
 

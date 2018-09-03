@@ -6,9 +6,8 @@ public class Motorcycle extends Vehicle {
         this.name();
     }
 
-    protected static int nameNumber = 0;
-    private int minSpeed = 5;
-
+    private static int nameNumber = 0;
+    private static final int MIN_SPEED = 5;
 
     @Override
     protected void name() {
@@ -16,15 +15,14 @@ public class Motorcycle extends Vehicle {
         this.name = "Motorcycle " + (nameNumber);
     }
 
-
     @Override
     protected void moveForAnHour(Race race) {
         int maxSpeed = 100;
-        if (race.isRaining == true)
-            maxSpeed -= randutil.generateNumInRange(45) + minSpeed-1;
-        if (race.isThereABrokenTruck == true )
-            if (maxSpeed >= race.speedEnabledWhileTruckIsBroken)
-                maxSpeed = race.speedEnabledWhileTruckIsBroken;
+        if (Race.isRaining)
+            maxSpeed -= Randutil.generateNumInRange(45) + MIN_SPEED-1;
+        if (race.isThereABrokenTruck)
+            if (maxSpeed >= Race.SPEED_ENABLEED_WHILE_TRUCK_IS_BROKEN)
+                maxSpeed = Race.SPEED_ENABLEED_WHILE_TRUCK_IS_BROKEN;
         distanceTraveled += maxSpeed;
     }
 

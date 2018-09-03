@@ -6,14 +6,9 @@ public class Weather {
         setRaining();
     }
 
+    static boolean isRaining = false;
 
-    public static boolean isRaining = false;
-
-    public static void setRaining(){
-        if (Randutil.generateNumInRange(10) <= 3){
-            isRaining = true;
-        } else {
-            isRaining = false;
-        }
+    static void setRaining(){
+        isRaining = Randutil.generateNumInRange(10) <= 3;
     }
 }

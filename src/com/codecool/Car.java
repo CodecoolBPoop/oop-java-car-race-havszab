@@ -12,21 +12,21 @@ public class Car extends Vehicle {
             "Dynamics", "Union", "Nimbus", "Virtue", "Treasure",
             "Flux", "Passion", "Paragon", "Wish", "Avalanche"};
 
-    private int minSpeed = 80;
+    private static final int MIN_SPEED = 80;
 
     @Override
     protected void name() {
-        String firstName = carNames[randutil.generateNumInRange(carNames.length - 1)];
-        String lastName = carNames[randutil.generateNumInRange(carNames.length - 1)];
+        String firstName = carNames[Randutil.generateNumInRange(carNames.length - 1)];
+        String lastName = carNames[Randutil.generateNumInRange(carNames.length - 1)];
         this.name = firstName + " " + lastName;
     }
 
     @Override
     protected void moveForAnHour(Race race) {
-        if (race.isThereABrokenTruck == true){
-            distanceTraveled += 75;
+        if (race.isThereABrokenTruck){
+            distanceTraveled += Race.SPEED_ENABLEED_WHILE_TRUCK_IS_BROKEN;
         } else {
-            distanceTraveled += (randutil.generateNumInRange(30) + minSpeed - 1);
+            distanceTraveled += (Randutil.generateNumInRange(30) + MIN_SPEED - 1);
         }
     }
 
